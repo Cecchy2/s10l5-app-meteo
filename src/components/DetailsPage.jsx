@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Col, Container, Nav, Row } from "react-bootstrap";
+import { Col, Container, Nav, Row, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
 //http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f
@@ -73,7 +73,7 @@ function DetailsPage() {
 
       <Row>
         <Col>
-          <h5 className="text-center">{city}</h5>
+          <h5 className="text-center">{city.toUpperCase()}</h5>
           <h3>
             •Oggi la temperatura è di {weather.temperature}˚ <br />• il cielo è
             {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}{" "}
@@ -84,7 +84,7 @@ function DetailsPage() {
 
       <Row className="whiteBg text-white">
         <Col>
-          <h3 className="text-center mt-5 ">Previsione per i prossimi giorni {city}</h3>
+          <h3 className="text-center mt-5 ">Previsione per i prossimi giorni {city.toUpperCase()}</h3>
           {forecast ? (
             <Row>
               {forecast.map((item, index) => (
@@ -97,7 +97,7 @@ function DetailsPage() {
               ))}
             </Row>
           ) : (
-            <p className="text-center">Caricamento delle previsioni...</p>
+            <Spinner animation="border" variant="secondary" />
           )}
         </Col>
       </Row>

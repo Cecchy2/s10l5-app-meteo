@@ -36,9 +36,9 @@ const today = () => {
 };
 
 function MainPage() {
-  const [city, setCity] = useState("City");
-  const [longitude, setLongitude] = useState(0);
-  const [latitude, setLatitude] = useState(0);
+  const [city, setCity] = useState("Palermo");
+  const [longitude, setLongitude] = useState(13.3524434);
+  const [latitude, setLatitude] = useState(38.1112268);
   const [weather, setWeather] = useState({
     temperature: null,
     description: "",
@@ -116,9 +116,9 @@ function MainPage() {
               <Form.Group controlId="formBasicEmail">
                 <Form.Control type="text" placeholder="Enter your city" value={city} onChange={handleCityChange} />
               </Form.Group>
-              {/* <Button variant="dark" type="submit">
+              <Button variant="dark" type="submit">
                 Cerca
-              </Button> */}
+              </Button>
             </div>
           </Form>
         </Col>
