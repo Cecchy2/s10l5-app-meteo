@@ -136,7 +136,7 @@ function MainPage() {
             </h6>
           </div>
 
-          <p className="temperatura text-center mt-4" style={{ fontsize: "100px" }}>
+          <p className="temperatura text-center mt-4 ps-3" style={{ fontsize: "100px" }}>
             {weather.temperature}˚
           </p>
         </Col>
@@ -184,7 +184,7 @@ function MainPage() {
           </div>
         </Col>
         <Col className="my-5">
-          <div className="text-center mb-4">
+          <div className="mb-4 ">
             {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}
           </div>
           <Button
