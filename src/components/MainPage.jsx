@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Badge, Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 //0a9b2013e0a7b23c5cc2d1a62d4fc96f
@@ -106,11 +106,14 @@ function MainPage() {
     event.preventDefault();
     fetchGeoLocation();
   };
+  useEffect(() => {
+    fetchWeather(/* "13.3524434", "38.1112268" */);
+  }, []);
 
   return (
-    <Container className="w-25 mt-4 bg-secondary rounded sun">
+    <Container className="mt-4 bg-secondary rounded sun" fluid>
       <Row>
-        <Col>
+        <Col xs={4} lg={12}>
           <Form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center align-items-center mt-5">
               <Form.Group controlId="formBasicEmail">
@@ -128,13 +131,12 @@ function MainPage() {
           <div className="mt-5 text-center">
             <h4>{city.toUpperCase()}</h4>
 
-            <h6 style={{ width: "125px" }}>
+            <h6>
               <Badge bg="dark">{today()}</Badge>
             </h6>
           </div>
 
           <p className="temperatura text-center mt-4" style={{ fontsize: "100px" }}>
-            {" "}
             {weather.temperature}˚
           </p>
         </Col>
