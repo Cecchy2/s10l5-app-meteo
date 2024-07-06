@@ -112,7 +112,7 @@ function MainPage() {
 
   return (
     <Container className="mt-4 bg-secondary rounded sun" fluid>
-      <Row>
+      <Row className="justify-content-center">
         <Col xs={4} lg={12}>
           <Form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center align-items-center mt-5">
@@ -190,7 +190,6 @@ function MainPage() {
           <Button
             variant="secondary"
             size="sm"
-            className="ms-5"
             onClick={() => navigate("/DetailsPage", { state: { city, weather, longitude, latitude } })}
           >
             Dettagli

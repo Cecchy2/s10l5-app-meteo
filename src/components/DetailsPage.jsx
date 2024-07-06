@@ -50,7 +50,7 @@ function DetailsPage() {
   };
 
   return (
-    <Container className="w-25 mt-4 bg-secondary rounded sun" style={{ height: "700px" }}>
+    <Container className="mt-4 bg-secondary rounded sun" fluid style={{ height: "700px" }}>
       <Row>
         <Col>
           <Nav.Link href="/">
