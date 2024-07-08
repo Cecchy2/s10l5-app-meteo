@@ -50,7 +50,7 @@ function DetailsPage() {
   };
 
   return (
-    <Container className="mt-4 bg-secondary rounded sun" fluid style={{ height: "700px" }}>
+    <Container className="bg-secondary rounded sun" fluid style={{ height: "100vh" }}>
       <Row>
         <Col>
           <Nav.Link href="/">
@@ -74,7 +74,7 @@ function DetailsPage() {
       <Row>
         <Col>
           <h5 className="text-center">{city.toUpperCase()}</h5>
-          <h3>
+          <h3 className="ms-5">
             •Oggi la temperatura è di {weather.temperature}˚ <br />• il cielo è
             {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}{" "}
             <br />• il vento soffia a {weather.wind}Km/h <br />• l'umidità e all {weather.humidity}% <br />
@@ -82,7 +82,7 @@ function DetailsPage() {
         </Col>
       </Row>
 
-      <Row className="whiteBg text-white">
+      <Row className="whiteBg text-white" style={{ height: "50vh" }}>
         <Col>
           <h3 className="text-center mt-5 ">Previsione per i prossimi giorni {city.toUpperCase()}</h3>
           {forecast ? (

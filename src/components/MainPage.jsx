@@ -111,7 +111,7 @@ function MainPage() {
   }, []);
 
   return (
-    <Container className="mt-4 bg-secondary rounded sun" fluid>
+    <Container className="bg-secondary rounded sun" style={{ height: "100vh" }} fluid>
       <Row className="justify-content-center">
         <Col xs={4} lg={12}>
           <Form onSubmit={handleSubmit}>
@@ -147,7 +147,7 @@ function MainPage() {
             <h6 className="m-0">description:</h6>
             <p className="mt-0 mb-4">{weather.description}</p>
           </div>
-          <div className="text-white">
+          <div className="text-white" style={{ height: "25vh" }}>
             <div className="mb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@ function MainPage() {
               </svg>{" "}
               wind: {weather.wind} km/h
             </div>
-            <div className="">
+            <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
