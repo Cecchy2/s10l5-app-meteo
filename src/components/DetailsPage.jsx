@@ -83,8 +83,8 @@ function DetailsPage() {
       </Row>
 
       <Row className="whiteBg text-white" style={{ height: "50vh" }}>
-        <Col>
-          <h3 className="text-center mt-5 ">Previsione per i prossimi giorni {city.toUpperCase()}</h3>
+        <Col className="mx-5 mb-5">
+          <h3 className="text-center my-5">Previsione per i prossimi giorni {city.toUpperCase()}</h3>
           {forecast ? (
             <Row>
               {forecast.map((item, index) => (

@@ -141,7 +141,7 @@ function MainPage() {
           </p>
         </Col>
       </Row>
-      <Row className="bgBlack my-5">
+      <Row className="bgBlack mx-5">
         <Col className="text-center my-5" xs={7}>
           <div className="text-white ">
             <h6 className="m-0">description:</h6>
