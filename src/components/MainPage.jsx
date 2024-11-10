@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Row, Badge, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const API_KEY = "0a9b2013e0a7b23c5cc2d1a62d4fc96f";
@@ -46,10 +46,8 @@ function MainPage() {
   const fetchGeoLocation = async () => {
     try {
       const resp = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
-
       if (resp.ok) {
         const cities = await resp.json();
-
         if (cities.length > 0) {
           const lat = cities[0].lat;
           const lon = cities[0].lon;
@@ -154,19 +152,6 @@ function MainPage() {
             className="mt-4"
           >
             Dettagli
-            <svg
-              xmlns="https://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-arrow-right-short ms-1"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
-              />
-            </svg>
           </Button>
         </Col>
       </Row>

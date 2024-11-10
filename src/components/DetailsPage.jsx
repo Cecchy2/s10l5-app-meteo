@@ -1,24 +1,18 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Nav, Row, Spinner } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-//http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f
-
-//0a9b2013e0a7b23c5cc2d1a62d4fc96f
+const API_KEY = "0a9b2013e0a7b23c5cc2d1a62d4fc96f";
 
 function DetailsPage() {
   const location = useLocation();
-  console.log(location);
   const { city, weather, longitude, latitude } = location.state;
-  const navigate = useNavigate();
-  const { state } = location;
   const [forecast, setForecast] = useState(null);
 
   const foreCastFetch = async () => {
     try {
       const response = await fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       );
       if (response.ok) {
         const weatherForecast = await response.json();
@@ -32,6 +26,7 @@ function DetailsPage() {
       alert("Error fetching forecast");
     }
   };
+
   useEffect(() => {
     foreCastFetch();
   }, []);
@@ -55,7 +50,7 @@ function DetailsPage() {
         <Col>
           <Nav.Link href="/">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
               width="40"
               height="40"
               fill="currentColor"
@@ -75,9 +70,9 @@ function DetailsPage() {
         <Col>
           <h5 className="text-center mb-5">{city.toUpperCase()}</h5>
           <h3 className="text-center mt-5">
-            •Oggi la temperatura è di {weather.temperature}˚• <br />• il cielo è
-            {weather.icon && <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}•{" "}
-            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità e al {weather.humidity}% •<br />
+            •Oggi la temperatura è di {weather.temperature}˚• <br />• il cielo è{" "}
+            {weather.icon && <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />} •{" "}
+            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità è al {weather.humidity}% •
           </h3>
         </Col>
       </Row>
