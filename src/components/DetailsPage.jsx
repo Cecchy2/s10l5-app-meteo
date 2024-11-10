@@ -73,11 +73,11 @@ function DetailsPage() {
 
       <Row>
         <Col>
-          <h5 className="text-center">{city.toUpperCase()}</h5>
-          <h3 className="ms-5">
-            •Oggi la temperatura è di {weather.temperature}˚ <br />• il cielo è
-            {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}{" "}
-            <br />• il vento soffia a {weather.wind}Km/h <br />• l'umidità e all {weather.humidity}% <br />
+          <h5 className="text-center mb-5">{city.toUpperCase()}</h5>
+          <h3 className="text-center mt-5">
+            •Oggi la temperatura è di {weather.temperature}˚• <br />• il cielo è
+            {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}•{" "}
+            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità e all {weather.humidity}% •<br />
           </h3>
         </Col>
       </Row>

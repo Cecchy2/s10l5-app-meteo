@@ -59,9 +59,10 @@ function MainPage() {
         const cities = await resp.json();
 
         if (cities.length > 0) {
-          setLatitude(cities[0].lat);
-          setLongitude(cities[0].lon);
-          fetchWeather(cities[0].lat, cities[0].lon);
+          const lat = cities[0].lat;
+          const lon = cities[0].lon;
+          setLatitude(lat);
+          setLongitude(lon);
         } else {
           alert("City not found");
         }
@@ -81,6 +82,7 @@ function MainPage() {
       );
       if (resp.ok) {
         const weatherData = await resp.json();
+        console.log(weatherData);
         setWeather({
           temperature: Math.round(weatherData.main.temp),
           description: weatherData.weather[0].description,
@@ -100,97 +102,68 @@ function MainPage() {
   const handleCityChange = (event) => {
     event.preventDefault();
     setCity(event.target.value);
+    fetchWeather();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     fetchGeoLocation();
+    fetchWeather();
   };
-  useEffect(() => {
-    fetchWeather(/* "13.3524434", "38.1112268" */);
-  }, []);
+
+  /* useEffect(() => {
+    fetchWeather();
+  }, []); */
 
   return (
     <Container className="bg-secondary rounded sun" style={{ height: "100vh" }} fluid>
       <Row className="justify-content-center">
-        <Col xs={4} lg={12}>
-          <Form onSubmit={handleSubmit}>
-            <div className="d-flex justify-content-center align-items-center mt-5">
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control type="text" placeholder="Enter your city" value={city} onChange={handleCityChange} />
-              </Form.Group>
-              <Button variant="dark" type="submit">
-                Cerca
-              </Button>
-            </div>
+        <Col xs={12} sm={8} md={6} lg={4}>
+          <Form onSubmit={handleSubmit} className="text-center mt-5">
+            <Form.Group controlId="formBasicEmail" className="mb-3">
+              <Form.Control type="text" placeholder="Enter your city" value={city} onChange={handleCityChange} />
+            </Form.Group>
+            <Button variant="dark" type="submit">
+              Cerca
+            </Button>
           </Form>
         </Col>
       </Row>
-      <Row className="justify-content-center">
-        <Col xs={4} className="mt-5 ">
-          <div className="mt-5 text-center">
-            <h4>{city.toUpperCase()}</h4>
-
-            <h6>
-              <Badge bg="dark">{today()}</Badge>
-            </h6>
-          </div>
-
-          <p className="temperatura text-center mt-4 ps-3" style={{ fontsize: "100px" }}>
+      <Row className="justify-content-center mt-5">
+        <Col xs={12} md={6} lg={4} className="text-center">
+          <h4>{city.toUpperCase()}</h4>
+          <h6>
+            <Badge bg="dark">{today()}</Badge>
+          </h6>
+          <p className="temperatura mt-4" style={{ fontSize: "100px" }}>
             {weather.temperature}˚
           </p>
         </Col>
       </Row>
-      <Row className="bgBlack mx-5">
-        <Col className="text-center my-5" xs={7}>
-          <div className="text-white ">
-            <h6 className="m-0">description:</h6>
-            <p className="mt-0 mb-4">{weather.description}</p>
+      <Row>
+        <Col xs={12} md={8} lg={6} className="text-center mx-auto">
+          <div className="d-flex justify-content-center align-items-center">
+            {weather.icon && (
+              <img
+                src={`http://openweathermap.org/img/w/${weather.icon}.png`}
+                alt="weather icon"
+                style={{ width: "50px", height: "50px" }}
+              />
+            )}
+            <h3 className="ms-2">{weather.description}</h3>
           </div>
-          <div className="text-white" style={{ height: "25vh" }}>
-            <div className="mb-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-wind"
-                viewBox="0 0 16 16"
-              >
-                <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5m-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2M0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5" />
-              </svg>{" "}
-              wind: {weather.wind} km/h
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-droplet"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z"
-                />
-              </svg>{" "}
-              umidity: {weather.humidity}%
-            </div>
-          </div>
-        </Col>
-        <Col className="my-5">
-          <div className="mb-4 ">
-            {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}
+          <div className="fs-5 d-flex flex-column align-items-center mt-3">
+            <Badge bg="dark" text="light" className="mb-2">
+              <h3>Wind: {weather.wind} km/h</h3>
+
+              <h3>Humidity: {weather.humidity}%</h3>
+            </Badge>
           </div>
           <Button
-            variant="secondary"
+            variant="warning"
             size="sm"
             onClick={() => navigate("/DetailsPage", { state: { city, weather, longitude, latitude } })}
+            className="mt-4"
           >
             Dettagli
             <svg
@@ -198,7 +171,7 @@ function MainPage() {
               width="16"
               height="16"
               fill="currentColor"
-              className="bi bi-arrow-right-short"
+              className="bi bi-arrow-right-short ms-1"
               viewBox="0 0 16 16"
             >
               <path
