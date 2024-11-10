@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-//0a9b2013e0a7b23c5cc2d1a62d4fc96f
-
-//geocoding :http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit={limit}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f
-
-//weather :https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f
-
-//http://openweathermap.org/img/w/10d.png
+const API_KEY = "0a9b2013e0a7b23c5cc2d1a62d4fc96f";
 
 const today = () => {
   const days = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
@@ -51,9 +45,7 @@ function MainPage() {
 
   const fetchGeoLocation = async () => {
     try {
-      const resp = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f`
-      );
+      const resp = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
 
       if (resp.ok) {
         const cities = await resp.json();
@@ -63,6 +55,7 @@ function MainPage() {
           const lon = cities[0].lon;
           setLatitude(lat);
           setLongitude(lon);
+          fetchWeather(lat, lon);
         } else {
           alert("City not found");
         }
@@ -75,14 +68,13 @@ function MainPage() {
     }
   };
 
-  const fetchWeather = async () => {
+  const fetchWeather = async (lat, lon) => {
     try {
       const resp = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=0a9b2013e0a7b23c5cc2d1a62d4fc96f&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       );
       if (resp.ok) {
         const weatherData = await resp.json();
-        console.log(weatherData);
         setWeather({
           temperature: Math.round(weatherData.main.temp),
           description: weatherData.weather[0].description,
@@ -100,20 +92,17 @@ function MainPage() {
   };
 
   const handleCityChange = (event) => {
-    event.preventDefault();
     setCity(event.target.value);
-    fetchWeather();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     fetchGeoLocation();
-    fetchWeather();
   };
 
-  /* useEffect(() => {
-    fetchWeather();
-  }, []); */
+  useEffect(() => {
+    fetchWeather(longitude, latitude);
+  }, []);
 
   return (
     <Container className="bg-secondary rounded sun" style={{ height: "100vh" }} fluid>
@@ -145,7 +134,7 @@ function MainPage() {
           <div className="d-flex justify-content-center align-items-center">
             {weather.icon && (
               <img
-                src={`http://openweathermap.org/img/w/${weather.icon}.png`}
+                src={`https://openweathermap.org/img/w/${weather.icon}.png`}
                 alt="weather icon"
                 style={{ width: "50px", height: "50px" }}
               />
@@ -155,7 +144,6 @@ function MainPage() {
           <div className="fs-5 d-flex flex-column align-items-center mt-3">
             <Badge bg="dark" text="light" className="mb-2">
               <h3>Wind: {weather.wind} km/h</h3>
-
               <h3>Humidity: {weather.humidity}%</h3>
             </Badge>
           </div>
@@ -167,7 +155,7 @@ function MainPage() {
           >
             Dettagli
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"

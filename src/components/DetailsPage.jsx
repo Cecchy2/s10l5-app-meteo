@@ -76,8 +76,8 @@ function DetailsPage() {
           <h5 className="text-center mb-5">{city.toUpperCase()}</h5>
           <h3 className="text-center mt-5">
             •Oggi la temperatura è di {weather.temperature}˚• <br />• il cielo è
-            {weather.icon && <img src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}•{" "}
-            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità e all {weather.humidity}% •<br />
+            {weather.icon && <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />}•{" "}
+            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità e al {weather.humidity}% •<br />
           </h3>
         </Col>
       </Row>
@@ -90,7 +90,7 @@ function DetailsPage() {
               {forecast.map((item, index) => (
                 <Col xs={4} key={item.dt} className="text-center">
                   <h5 className="m-0 p-0">{forecastDay(index)}</h5>
-                  <img src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt="weather icon" />
+                  <img src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt="weather icon" />
                   <h4 className="m-0 p-0">{Math.round(item.main.temp)}˚</h4>
                   <p>{item.weather[0].description}</p>
                 </Col>
