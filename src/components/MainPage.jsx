@@ -104,8 +104,10 @@ function MainPage() {
     fetchWeather(longitude, latitude);
   }, []);
 
+  const weatherClass = weather.icon.includes("d") ? "sun" : "rain";
+
   return (
-    <Container className="bg-secondary rounded sun" style={{ height: "100vh" }} fluid>
+    <Container className={`bg-secondary rounded ${weatherClass}`} style={{ height: "100vh" }} fluid>
       <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
           <Form onSubmit={handleSubmit} className="text-center mt-5">
