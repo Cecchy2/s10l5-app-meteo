@@ -43,9 +43,10 @@ function DetailsPage() {
         return "";
     }
   };
+  const weatherClass = weather.icon.includes("d") ? "sun" : "rain";
 
   return (
-    <Container className="bg-secondary rounded sun" fluid style={{ height: "100vh" }}>
+    <Container className={`bg-secondary rounded ${weatherClass}`} fluid style={{ height: "100vh" }}>
       <Row>
         <Col>
           <Nav.Link href="/">
