@@ -40,10 +40,12 @@ function MainPage() {
     humidity: null,
     icon: "",
   });
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
   const fetchGeoLocation = async () => {
+    setError(null);
     try {
       const resp = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
       if (resp.ok) {
@@ -55,14 +57,14 @@ function MainPage() {
           setLongitude(lon);
           fetchWeather(lat, lon);
         } else {
-          alert("City not found");
+          setError("City not found");
         }
       } else {
-        alert("Failed to fetch geolocation");
+        setError("Failed to fetch geolocation");
       }
     } catch (error) {
       console.error("Error fetching geolocation:", error);
-      alert("Error fetching geolocation");
+      setError("Error fetching geolocation");
     }
   };
 
@@ -116,6 +118,13 @@ function MainPage() {
           </Form>
         </Col>
       </Row>
+      {error && (
+        <Row className="justify-content-center mt-3">
+          <Col xs={12} md={6} lg={4} className="text-center">
+            <Badge bg="danger">{error}</Badge>
+          </Col>
+        </Row>
+      )}
       <Row className="justify-content-center mt-5">
         <Col xs={12} md={6} lg={4} className="text-center">
           <h4>{city.toUpperCase()}</h4>
