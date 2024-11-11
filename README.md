@@ -70,7 +70,7 @@ L'app è stata deployata su **Netlify**. È accessibile all'URL: [https://meteoc
 1. **Clona il repository**:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Cecchy2/s10l5-app-meteo.git
 
    npm install
 
