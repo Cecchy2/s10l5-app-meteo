@@ -11,7 +11,7 @@
 .rain {
     background-image: 
     linear-gradient(rgba(255, 255, 255, 0.4), rgba(20, 19, 19, 0.044)),
-    url("../public/photo-1494714198743-ba35ce177d03.avif");
+    url("../photo-1494714198743-ba35ce177d03.avif");
     background-size: cover;
     background-position: top;
     
