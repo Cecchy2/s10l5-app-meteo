@@ -43,7 +43,57 @@ function DetailsPage() {
         return "";
     }
   };
-  const weatherClass = weather.icon.includes("d") ? "sun" : "rain";
+
+  let weatherClass;
+  switch (weather.icon) {
+    case "01d":
+      weatherClass = "sun";
+      break;
+    case "01n":
+    case "02n":
+      weatherClass = "night text-white";
+      break;
+    case "02d":
+      weatherClass = "fewclouds";
+      break;
+    case "03d":
+    case "04d":
+      weatherClass = "clouds";
+      break;
+    case "03n":
+    case "04n":
+      weatherClass = "cloudsNight text-white";
+      break;
+    case "09d":
+    case "10d":
+      weatherClass = "rain";
+      break;
+    case "09n":
+    case "10n":
+      weatherClass = "rainNight";
+      break;
+    case "11d":
+      weatherClass = "thunder";
+      break;
+
+    case "11n":
+      weatherClass = "thunderNight";
+      break;
+    case "13d":
+      weatherClass = "snow";
+      break;
+
+    case "13n":
+      weatherClass = "snowNight";
+      break;
+    case "50d":
+    case "50n":
+      weatherClass = "mist";
+      break;
+    default:
+      weatherClass = "default";
+      break;
+  }
 
   return (
     <Container className={`bg-secondary rounded ${weatherClass}`} fluid style={{ height: "100vh" }}>
@@ -73,7 +123,7 @@ function DetailsPage() {
           <h3 className="text-center mt-5">
             •Oggi la temperatura è di {weather.temperature}˚• <br />• il cielo è{" "}
             {weather.icon && <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />} •{" "}
-            <br />• il vento soffia a {weather.wind}Km/h • <br />• l'umidità è al {weather.humidity}% •
+            <br />• il vento soffia a {weather.wind}Km/h • <br />• l&#39;umidità è al {weather.humidity}% •
           </h3>
         </Col>
       </Row>

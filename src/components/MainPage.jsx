@@ -30,7 +30,7 @@ const today = () => {
 };
 
 function MainPage() {
-  const [city, setCity] = useState("Palermo");
+  const [city, setCity] = useState("");
   const [longitude, setLongitude] = useState(13.3524434);
   const [latitude, setLatitude] = useState(38.1112268);
   const [weather, setWeather] = useState({
@@ -104,7 +104,56 @@ function MainPage() {
     fetchWeather(longitude, latitude);
   }, []);
 
-  const weatherClass = weather.icon.includes("d") ? "sun" : "rain";
+  let weatherClass;
+  switch (weather.icon) {
+    case "01d":
+      weatherClass = "sun";
+      break;
+    case "01n":
+    case "02n":
+      weatherClass = "night text-white";
+      break;
+    case "02d":
+      weatherClass = "fewclouds";
+      break;
+    case "03d":
+    case "04d":
+      weatherClass = "clouds";
+      break;
+    case "03n":
+    case "04n":
+      weatherClass = "cloudsNight text-white";
+      break;
+    case "09d":
+    case "10d":
+      weatherClass = "rain";
+      break;
+    case "09n":
+    case "10n":
+      weatherClass = "rainNight";
+      break;
+    case "11d":
+      weatherClass = "thunder";
+      break;
+
+    case "11n":
+      weatherClass = "thunderNight";
+      break;
+    case "13d":
+      weatherClass = "snow";
+      break;
+
+    case "13n":
+      weatherClass = "snowNight";
+      break;
+    case "50d":
+    case "50n":
+      weatherClass = "mist";
+      break;
+    default:
+      weatherClass = "default";
+      break;
+  }
 
   return (
     <Container className={`bg-secondary rounded ${weatherClass}`} style={{ height: "100vh" }} fluid>
