@@ -82,12 +82,14 @@ function MainPage() {
           humidity: weatherData.main.humidity,
           icon: weatherData.weather[0].icon,
         });
+      } else if (resp.status === 401) {
+        setError("API Key non valida o non autorizzata");
       } else {
-        alert("Failed to fetch weather data");
+        setError("Errore nel recupero dei dati meteo");
       }
     } catch (error) {
-      console.error("Error fetching weather data:", error);
-      alert("Error fetching weather data");
+      console.error("Errore durante la richiesta dei dati meteo:", error);
+      setError("Errore di rete o problema con l'API");
     }
   };
 
@@ -101,7 +103,7 @@ function MainPage() {
   };
 
   useEffect(() => {
-    fetchWeather(longitude, latitude);
+    fetchWeather(latitude, longitude);
   }, []);
 
   let weatherClass;
