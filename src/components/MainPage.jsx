@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row, Badge, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = "0a9b2013e0a7b23c5cc2d1a62d4fc96f";
 
 const today = () => {
   const days = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
