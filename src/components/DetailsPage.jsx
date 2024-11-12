@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Nav, Row, Spinner } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 
-const API_KEY = "0a9b2013e0a7b23c5cc2d1a62d4fc96f";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 function DetailsPage() {
   const location = useLocation();
